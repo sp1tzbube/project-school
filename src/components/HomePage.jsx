@@ -355,7 +355,7 @@ const HomePage = () => {
       disableRemotePlayback
       className="hero-video"
     >
-      <source src="src/assets/videos/background_3.mp4" type="video/mp4" />
+      <source src="/background_3.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <div className="container hero-content">
