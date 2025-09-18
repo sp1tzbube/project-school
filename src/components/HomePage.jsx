@@ -9,6 +9,7 @@ import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import { FiMail, FiPhone, FiMapPin, FiHome } from 'react-icons/fi';
 // axios import removed because `fetch` is used
 // import axios from 'axios';
+import { apiFetch } from '../apiClient';
 
 // Hook for mobile view
 function useIsMobile(breakpoint = 978) {
@@ -92,9 +93,9 @@ const HomePage = () => {
     
     // Load all data in parallel
     const [apartmentsRes, galleryRes, profileRes] = await Promise.all([
-    fetch('/api/apartments'),
-    fetch('/api/gallery'),
-    fetch('/api/profile')
+    apiFetch('/api/apartments'),
+    apiFetch('/api/gallery'),
+    apiFetch('/api/profile')
     ]);
 
     const apartmentsData = await apartmentsRes.json();
@@ -181,7 +182,7 @@ const HomePage = () => {
     }
 
     try {
-    await fetch('/api/contact', {
+    await apiFetch('/api/contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(contactData)
