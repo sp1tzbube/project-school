@@ -33,6 +33,7 @@ import {
   FaPaw,
   FaHotTub
 } from "react-icons/fa";
+import { apiFetch } from '../apiClient';
 import "./App.css";
 
 function AdminPanel() {
@@ -58,7 +59,7 @@ function AdminPanel() {
 
     try {
       // Send password to server for authentication
-      const response = await fetch('/api/auth/login', {
+      const response = await apiFetch('/api/auth/login', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -219,7 +220,7 @@ function ProfileAdmin() {
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch("/api/profile");
+      const res = await apiFetch("/api/profile");
       if (res.ok) {
         const data = await res.json();
         setProfile(data);
@@ -243,7 +244,7 @@ function ProfileAdmin() {
     console.log('Submitting profile data:', profile); // Debug log
     
     try {
-      const res = await fetch("/api/profile", {
+      const res = await apiFetch("/api/profile", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profile),
@@ -277,7 +278,7 @@ function ProfileAdmin() {
     formData.append("photo", photoFile);
     
     try {
-      const res = await fetch("/api/profile/photo", {
+      const res = await apiFetch("/api/profile/photo", {
         method: "POST",
         body: formData,
       });
@@ -410,7 +411,7 @@ function GalleryAdmin() {
 
   const fetchPhotos = async () => {
     try {
-      const res = await fetch("/api/gallery");
+      const res = await apiFetch("/api/gallery");
       if (res.ok) {
         const data = await res.json();
         setPhotos(data);
@@ -429,7 +430,7 @@ function GalleryAdmin() {
     formData.append("image", file);
     
     try {
-      const res = await fetch("/api/gallery", {
+      const res = await apiFetch("/api/gallery", {
         method: "POST",
         body: formData,
       });
@@ -453,7 +454,7 @@ function GalleryAdmin() {
     if (!window.confirm(t('confirmDeletePhoto'))) return;
     
     try {
-      const res = await fetch(`/api/gallery/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`/api/gallery/${id}`, { method: "DELETE" });
       if (res.ok) {
         setPhotos(prev => prev.filter(p => p._id !== id));
       } else {
@@ -569,7 +570,7 @@ function ApartmentsAdmin() {
 
   const fetchApartments = async () => {
     try {
-      const res = await fetch("/api/apartments");
+      const res = await apiFetch("/api/apartments");
       if (res.ok) {
         const data = await res.json();
         setApartments(data);
@@ -593,7 +594,7 @@ function ApartmentsAdmin() {
       formData.append("image", file);
     
       try {
-        const res = await fetch("/api/upload", {
+        const res = await apiFetch("/api/upload", {
           method: "POST",
           body: formData,
         });
@@ -630,7 +631,7 @@ function ApartmentsAdmin() {
         apartmentData.images = uploadedImages;
       }
     
-      const res = await fetch("/api/apartments", {
+      const res = await apiFetch("/api/apartments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(apartmentData),
@@ -662,7 +663,7 @@ function ApartmentsAdmin() {
     if (!window.confirm(t('confirmDeleteApartment'))) return;
     
     try {
-      const res = await fetch(`/api/apartments/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`/api/apartments/${id}`, { method: "DELETE" });
       if (res.ok) {
         setApartments(prev => prev.filter(a => a._id !== id));
       } else {
@@ -730,7 +731,7 @@ function ApartmentsAdmin() {
         updateData.images = uploaded;
       }
 
-      const res = await fetch(`/api/apartments/${id}`, {
+      const res = await apiFetch(`/api/apartments/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateData),
@@ -1392,7 +1393,7 @@ function ContactsAdmin() {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch("/api/contact");
+      const res = await apiFetch("/api/contact");
       if (res.ok) {
         const data = await res.json();
         setContacts(data);
@@ -1404,7 +1405,7 @@ function ContactsAdmin() {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await fetch(`/api/contact/${id}`, {
+      const res = await apiFetch(`/api/contact/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
@@ -1424,7 +1425,7 @@ function ContactsAdmin() {
     if (!window.confirm(t('confirmDeleteMessage'))) return;
     
     try {
-      const res = await fetch(`/api/contact/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`/api/contact/${id}`, { method: "DELETE" });
       if (res.ok) {
         setContacts(prev => prev.filter(c => c._id !== id));
       }
