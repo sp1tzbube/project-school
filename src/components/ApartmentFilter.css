@@ -1,0 +1,143 @@
+/* ApartmentFilter styles
+   - Supports both "buttons" mode (.filter-buttons) and "select/inputs" mode (.apartment-filter)
+   - Uses design tokens (CSS variables) already present in the project
+*/
+
+/* Container for the select/inputs mode */
+.apartment-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center; /* center horizontally */
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* Form controls (selects and inputs) */
+.apartment-filter select,
+.apartment-filter input[type="text"],
+.apartment-filter input[type="number"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.75rem 1rem;
+  min-width: 180px;
+  border: 1.5px solid var(--tertiary, #e5e7eb);
+  border-radius: 12px;
+  background: var(--secondary, #ffffff);
+  color: var(--text-dark, #111827);
+  font-size: 0.95rem;
+  line-height: 1.2;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.12s ease;
+}
+
+.apartment-filter select:hover,
+.apartment-filter input[type="text"]:hover,
+.apartment-filter input[type="number"]:hover {
+  border-color: var(--secondary, #ffcc00);
+}
+
+.apartment-filter select:focus,
+.apartment-filter input[type="text"]:focus,
+.apartment-filter input[type="number"]:focus {
+  outline: none;
+  border-color: var(--secondary, #ffcc00);
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.25);
+}
+
+/* Reset button to match theme */
+.apartment-filter .reset-btn {
+  padding: 0.75rem 1.2rem;
+  border: 2px solid var(--tertiary, #e5e7eb);
+  border-radius: 12px;
+  background: var(--secondary, #ffffff);
+  color: var(--text-dark, #111827);
+  cursor: pointer;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.apartment-filter .reset-btn:hover {
+  border-color: var(--secondary, #ffcc00);
+  color: var(--text-dark, #111827);
+  transform: translateY(-1px);
+}
+
+.apartment-filter .reset-btn:active {
+  transform: translateY(0);
+}
+
+/* Buttons mode (kept from existing styles) */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-buttons button {
+  padding: 0.9rem 1.7rem;
+  border: none;
+  border-radius: 30px;
+  background: var(--accent);
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  font-weight: 500;
+  border: 2px solid transparent;
+}
+
+.filter-buttons button.active {
+  background: var(--secondary);
+  color: var(--text-dark);
+  border-color: var(--tertiary);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(255,204,0,0.18);
+}
+
+.filter-buttons button:hover:not(.active) {
+  background: var(--tertiary);
+  color: var(--text-light);
+  border-color: var(--secondary);
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .apartment-filter {
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .apartment-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .apartment-filter select,
+  .apartment-filter input[type="text"],
+  .apartment-filter input[type="number"],
+  .apartment-filter .reset-btn {
+    width: 100%;
+  }
+
+  .filter-buttons {
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-buttons button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem 0.5rem;
+    border-radius: 20px;
+  }
+}

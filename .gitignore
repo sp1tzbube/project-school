@@ -1,0 +1,9 @@
+node_modules/
+server/node_modules/
+dist/
+.env
+.env.*
+server/.env
+server/.env.*
+src/assets/videos/
+!src/assets/videos/background_3.mp4
