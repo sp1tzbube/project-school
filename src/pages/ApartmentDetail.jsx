@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { apiFetch } from "../apiClient";
 
 import GalleryModal from "../components/GalleryModal";
 import { 
@@ -68,7 +69,7 @@ const ApartmentDetail = () => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetch(`/api/apartments/${id}`)
+    apiFetch(`/api/apartments/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Not found");
         return res.json();
